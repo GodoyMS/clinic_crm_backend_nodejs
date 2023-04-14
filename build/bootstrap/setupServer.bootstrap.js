@@ -95,6 +95,7 @@ class ClinicsServer {
         log.info(`Server has started with process ${process.pid}.`);
         const PORT = Number(configEnvs_1.config.SERVER_PORT);
         httpServer.listen(PORT, () => {
+
             log.info(`Server running at ${PORT}.`);
         });
     }
