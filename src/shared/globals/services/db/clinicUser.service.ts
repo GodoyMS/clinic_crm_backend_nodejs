@@ -16,6 +16,10 @@ class UserService {
     ]);
     return users[0];
   }
+  public async getUserDocById(id:string):Promise<IUserDocument>{
+   const user:IUserDocument= (await UserModel.findOne({_id:id}).exec()) as IUserDocument;
+   return user;
+  }
 
   /*public async getUserByIdWithPopulate(userId: string): Promise<IUserDocument> {
     const user: IUserDocument = await UserModel
@@ -30,10 +34,7 @@ class UserService {
       username: '$authId.username',
       uId: '$authId.uId',
       email: '$authId.email',
-      patients:1,
       phone:1,
-      doctors:1,
-      appointments:1,
       location:1,
       specialty:1
 

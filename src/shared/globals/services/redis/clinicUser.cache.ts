@@ -11,6 +11,20 @@ export class UserCache extends BaseCache {
   constructor() {
     super('clinicUserCache');
   }
+  public async updateAFieldUserInCache(key:string,field:string,value:string):Promise<void>{
+   try {
+      if (!this.client.isOpen) {
+         await this.client.connect();
+       }
+       await this.client.HSET(`usersClinic:${key}`, `${field}`, `${value}`);
+
+
+   } catch (error) {
+      log.error(error);
+      throw new ServerError('Server Redis error. Try again.');
+
+   }
+  }
 
   public async saveToUserCache(key: string, userUId: string, createdUser: IUserDocument): Promise<void> {
     const createdAt = new Date();
@@ -19,12 +33,8 @@ export class UserCache extends BaseCache {
       uId,
       username,
       email,
-      patients,
-      doctors,
       location,
       specialty
-
-
     } = createdUser;
 
     const dataToSave = {
@@ -32,52 +42,43 @@ export class UserCache extends BaseCache {
       uId: `${uId}`,
       username: `${username}`,
       email: `${email}`,
-      patients: JSON.stringify(patients),
-      doctors: JSON.stringify(doctors),
       location: JSON.stringify(location),
       specialty: `${specialty}`,
       createdAt: `${createdAt}`,
-
-
     };
 
     try {
       if (!this.client.isOpen) {
-        await this.client.connect();
-      }
+         await this.client.connect();
+       }
 
-      await this.client.ZADD('user', { score: parseInt(userUId, 10), value: `${key}` });
+
+      await this.client.ZADD('userClinic', { score: parseInt(userUId, 10), value: `${key}` });
       for (const [itemKey, itemValue] of Object.entries(dataToSave)) {
-        await this.client.HSET(`users:${key}`, `${itemKey}`, `${itemValue}`);
+        await this.client.HSET(`usersClinic:${key}`, `${itemKey}`, `${itemValue}`);
       }
     } catch (error) {
       log.error(error);
-      throw new ServerError('Server Redis error. Try again.');
+      throw new ServerError('Server Redis error saveToUserCache. Try again.');
     }
   }
 
   public async getUserFromCache(userId: string): Promise<IUserDocument | null> {
     try {
       if (!this.client.isOpen) {
-        await this.client.connect();
-      }
+        await this.client.connect(); }
 
-      const response: IUserDocument = (await this.client.HGETALL(`users:${userId}`)) as unknown as IUserDocument;
-      response.patients = Generators.parseJson(`${response.patients}`);
-      response.doctors = Generators.parseJson(`${response.doctors}`);
-      response.appointments = Generators.parseJson(`${response.appointments}`);
+      const response: IUserDocument = (await this.client.HGETALL(`usersClinic:${userId}`)) as unknown as IUserDocument;
       response.phone = Generators.parseJson(`${response.phone}`);
       response.specialty = Generators.parseJson(`${response.specialty}`);
-
-
       response.createdAt = new Date(Generators.parseJson(`${response.createdAt}`));
       response.location = Generators.parseJson(`${response.location}`);
-
+      response.email = Generators.parseJson(`${response.email}`);
 
       return response;
     } catch (error) {
       log.error(error);
-      throw new ServerError('Server Redis error. Try again.');
+      throw new ServerError('Server Redis error getUserFromCache. Try again.');
     }
   }
 }

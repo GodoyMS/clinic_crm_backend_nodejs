@@ -4,6 +4,8 @@ import { ObjectId } from 'mongodb';
 export interface IUserDocument extends Document {
   _id: string | ObjectId;
   uId?: string;
+  dni:string;
+  clinicId:mongoose.Types.ObjectId;
   authId: string | ObjectId;
   email?: string;
   password?: string;
@@ -12,11 +14,9 @@ export interface IUserDocument extends Document {
   age:number;
   city:string;
   sex:string;
-  clinic:mongoose.Types.ObjectId;
   clinicHistory:[string];
   odontogram:[string];
-  consents:[string];
-  appointments:mongoose.Types.ObjectId[];
+  consent:[string];
   passwordResetToken?: string;
   passwordResetExpires?: number | string;
   createdAt?: Date;

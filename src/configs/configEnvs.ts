@@ -18,7 +18,9 @@ class Config {
   public CLOUD_API_SECRET: string | undefined;
   public SALT_ROUND: string | undefined;
   public CLOUD_DOMAIN:string |undefined;
-  public BASE_PATH:string | undefined;
+  public BASE_PATH_CLINIC:string | undefined;
+  public BASE_PATH_PATIENT:string | undefined;
+
 
   public SENDER_EMAIL:string |undefined;
   public SENDER_EMAIL_PASSWORD:string | undefined;
@@ -43,7 +45,9 @@ class Config {
     this.CLOUD_API_SECRET = process.env.CLOUD_API_SECRET;
     this.SALT_ROUND = process.env.SALT_ROUND;
     this.CLOUD_DOMAIN=process.env.CLOUD_DOMAIN;
-    this.BASE_PATH=process.env.BASE_PATH;
+    this.BASE_PATH_CLINIC=process.env.BASE_PATH_CLINIC;
+    this.BASE_PATH_PATIENT=process.env.BASE_PATH_PATIENT;
+
     this.SENDER_EMAIL=process.env.SENDER_EMAIL;
 
     this.SENDER_EMAIL_PASSWORD=process.env.SENDER_EMAIL_PASSWORD;

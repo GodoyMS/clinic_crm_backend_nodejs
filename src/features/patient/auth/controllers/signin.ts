@@ -3,25 +3,33 @@ import { config } from '@configs/configEnvs';
 import JWT from 'jsonwebtoken';
 import { joiValidation } from '@decorators/joi-validation.decorators';
 import HTTP_STATUS from 'http-status-codes';
-import { authService } from '@services/db/clinicAuth.service';
+import { authService } from '@services/db/patientAuth.service';
 import { BadRequestError } from '@helpers/errors/badRequestError';
-import { loginSchema } from '@clinic/auth/schemes/signin';
-import { IAuthDocument } from '@clinic/auth/interfaces/authDocument.interface';
+import { loginSchema } from '@patient/auth/schemes/signin';
+import { IAuthDocument } from '@patient/auth/interfaces/authDocument.interface';
 import bcrypt from 'bcryptjs';
 
 export class SignIn {
+   static compare(existingUserCompare:IAuthDocument,passwordInput:string):boolean{
+      const {password} = existingUserCompare;
+      const doesPasswordMatch : boolean= password === passwordInput;
+      return doesPasswordMatch;
+    }
+
+
   @joiValidation(loginSchema)
   public async read(req: Request, res: Response): Promise<void> {
-    const { email, password } = req.body;
-    const existingUser: IAuthDocument | undefined = await authService.getAuthUserByEmail(email);
+    const { dni, password, } = req.body;
+    const existingUser: IAuthDocument | undefined = await authService.getAuthUserByDni(dni);
     console.log(existingUser);
 
     if (!existingUser) {
       throw new BadRequestError('Invalid credentials user not found');
     }
 
-    const passwordMatch: boolean =await existingUser.comparePassword(password);
-    console.log('Password:Math',passwordMatch);
+
+
+    const passwordMatch: boolean =await SignIn.compare(existingUser,password);
 
     if (!passwordMatch) {
       throw new BadRequestError('Invalid credentials password not match');
@@ -30,13 +38,12 @@ export class SignIn {
     const userJwt: string = JWT.sign(
       {
         userId: existingUser._id,
-        uId: existingUser.uId,  
-        email: existingUser.email,
-        username: existingUser.username
+        uId: existingUser.uId,
+        dni: existingUser.dni
       },
       config.JWT_TOKEN!
     );
     req.session = { jwt: userJwt };
-    res.status(HTTP_STATUS.OK).json({ message: 'User login successfully', user: existingUser, token: userJwt });
+    res.status(HTTP_STATUS.OK).json({ message: 'Patient login successfully', user: existingUser, token: userJwt });
   }
 }

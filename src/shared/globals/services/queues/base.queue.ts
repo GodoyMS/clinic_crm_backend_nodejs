@@ -3,11 +3,13 @@ import Logger from 'bunyan';
 import { ExpressAdapter, createBullBoard, BullAdapter } from '@bull-board/express';
 import { config } from '@configs/configEnvs';
 import { logger } from '@configs/configLogs';
-import { IAuthJob } from '@clinic/auth/interfaces/authJob.interface';
+import { IAuthJob }   from '@clinic/auth/interfaces/authJob.interface';
 import { IEmailJob } from '@clinic/user/interfaces/emailJob.interface';
 import { IUserJob } from '@clinic/user/interfaces/userJob.interface';
+import { IAuthJob as IAuthJobPatient }   from '@patient/auth/interfaces/authJob.interface';
+import { IUserJob as IUserJobPatient  } from '@patient/user/interfaces/userJob.interface';
 
-type IBaseJobData = IAuthJob | IEmailJob | IUserJob;
+type IBaseJobData = IAuthJob | IEmailJob | IUserJob | IAuthJobPatient | IUserJobPatient ;
 
 let bullAdapters: BullAdapter[] = [];
 

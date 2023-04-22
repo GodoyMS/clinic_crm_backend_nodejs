@@ -1,8 +1,8 @@
 import express, { Router } from 'express';
 import { AuthMiddleware, authMiddleware } from '@helpers/middlewares/auth-middleware';
-import { CurrentUser } from '@clinic/auth/controllers/currentUser';
-import { UpdateAuth } from '@clinic/auth/controllers/updateAuth';
-class CurrentUserRoutesClinic {
+import { CurrentUser } from '@patient/auth/controllers/currentUser';
+
+class CurrentUserRoutesPatient {
 
    private router:Router;
    constructor(){
@@ -12,11 +12,12 @@ class CurrentUserRoutesClinic {
 
    public routes():Router{
       this.router.get('/currentUser',authMiddleware.checkAuthentication,CurrentUser.prototype.read);
+
       return this.router;
    }
 
 
 }
 
-export const currentUserRoutesClinic:CurrentUserRoutesClinic=new CurrentUserRoutesClinic();
+export const currentUserRoutesPatient:CurrentUserRoutesPatient=new CurrentUserRoutesPatient();
 

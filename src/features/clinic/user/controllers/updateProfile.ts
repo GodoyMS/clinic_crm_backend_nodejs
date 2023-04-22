@@ -5,7 +5,6 @@ import { userService } from '@services/db/clinicUser.service';
 import HTTP_STATUS from 'http-status-codes';
 
 const userCache: UserCache = new UserCache();
-
 export class CurrentUser {
    public async read(req: Request, res: Response): Promise<void> {
       let isUser = false;

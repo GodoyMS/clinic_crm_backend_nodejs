@@ -1,11 +1,10 @@
 import { Request, Response } from 'express';
-import { UserCache } from '@services/redis/clinicUser.cache';
-import { IUserDocument } from '@clinic/user/interfaces/userDocument.interface';
-import { userService } from '@services/db/clinicUser.service';
+import { UserCache } from '@services/redis/patientUser.cache';
+import { IUserDocument } from '@patient/user/interfaces/userDocument.interface';
+import { userService } from '@services/db/patientUser.service';
 import HTTP_STATUS from 'http-status-codes';
 
 const userCache: UserCache = new UserCache();
-
 export class CurrentUser {
    public async read(req: Request, res: Response): Promise<void> {
       let isUser = false;

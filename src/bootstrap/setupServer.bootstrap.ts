@@ -51,7 +51,7 @@ export class ClinicsServer {
         origin: config.CLIENT_URL,
         credentials: true,
         optionsSuccessStatus: 200,
-        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS','PATCH']
       })
     );
   }
@@ -104,7 +104,7 @@ export class ClinicsServer {
     const io: Server = new Server(httpServer, {
       cors: {
         origin: config.CLIENT_URL,
-        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS','PATCH']
       }
     });
     const pubClient = createClient({ url: config.REDIS_HOST });

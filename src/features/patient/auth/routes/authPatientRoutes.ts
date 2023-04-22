@@ -1,7 +1,7 @@
 import express, { Router } from 'express';
-import { SignUp } from '@clinic/auth/controllers/signup';
-import { SignIn } from '@clinic/auth/controllers/signin';
-import { SignOut } from '@clinic/auth/controllers/signout';
+import { SignUpPatient } from '@patient/auth/controllers/signup';
+import { SignIn } from '@patient/auth/controllers/signin';
+import { SignOut } from '@patient/auth/controllers/signout';
 class AuthRoutes {
   private router: Router;
 
@@ -10,7 +10,7 @@ class AuthRoutes {
   }
 
   public routes(): Router {
-    this.router.post('/signup', SignUp.prototype.create);
+    this.router.post('/signup', SignUpPatient.prototype.create);
     this.router.post('/signin',SignIn.prototype.read);
 
     return this.router;
@@ -23,4 +23,4 @@ class AuthRoutes {
  }
 }
 
-export const authRoutesClinic: AuthRoutes = new AuthRoutes();
+export const authPatientRoutes: AuthRoutes = new AuthRoutes();

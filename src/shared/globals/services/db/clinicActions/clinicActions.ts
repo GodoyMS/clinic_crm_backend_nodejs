@@ -1,9 +1,23 @@
-import { IAuthDocument } from '@patient/auth/interfaces/authDocument.interface';
+import { IAuthDocument } from '@clinic/auth/interfaces/authDocument.interface';
+import { IUserDocument } from '@clinic/user/interfaces/userDocument.interface';
 
-import { AuthModel } from '@patient/auth/models/auth.schema';
+import { UserModel } from '@clinic/user/models/user.schema';
+import { AuthModel } from '@clinic/auth/models/auth.schema';
+
 import { Generators } from '@helpers/generators/generators';
 
-class AuthService {
+class ClinicActionsService {
+
+   public async getAuthClinicByEmail(email:string):Promise<IAuthDocument>{
+      const clinic = (await AuthModel.findOne({email:email}).exec()) as IAuthDocument;
+      return clinic;
+   }
+
+   public async updateClinicAuth(data:IAuthDocument,  ):Promise<void>{
+      //
+   }
+
+
 
   public async createAuthUser(data: IAuthDocument): Promise<void> {
     await AuthModel.create(data);
@@ -27,12 +41,6 @@ class AuthService {
    const user: IAuthDocument = (await AuthModel.findOne({ email }).exec()) as IAuthDocument;
    return user;
  }
-
- public async getAuthUserByDni(dni:string):Promise<IAuthDocument>{
-   const userPatient:IAuthDocument= (await AuthModel.findOne({dni}).exec()) as IAuthDocument;
-   return userPatient;
-  }
-
 }
 
-export const authService: AuthService = new AuthService();
+export const clinicActionsService: ClinicActionsService = new ClinicActionsService();
