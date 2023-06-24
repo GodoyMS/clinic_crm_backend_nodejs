@@ -18,6 +18,7 @@ import { GetClinicAppointments } from '../controllers/getClinicAppointments';
 import { DeleteAppointment } from '../controllers/deleteAppointmentById';
 import { GetClinicAppointmentById } from '../controllers/getAppointmentById';
 import { DeleteManyAppointments } from '../controllers/deleteManyAppointmentsById';
+import { UpdateDoctor } from '../controllers/updateDoctor';
 // const upload = multer({ dest: 'uploads/' });
 class ClinicAuthActionsRoutes {
    private router: Router;
@@ -54,6 +55,8 @@ class ClinicAuthActionsRoutes {
       this.router.post('/doctor/registerDoctor',authMiddleware.checkAuthentication,RegisterDoctor.prototype.create);
       this.router.get('/doctor/getClinicDoctors',authMiddleware.checkAuthentication,GetClinicDoctors.prototype.read);
       this.router.delete('/doctor/deleteClinicDoctor/:id',authMiddleware.checkAuthentication,DeleteUserDoctor.prototype.delete   );
+      this.router.put('/doctor/updateClinicDoctorProfileImage/:id',authMiddleware.checkAuthentication, UpdateDoctor.prototype.updateProfileById);
+
 
       return this.router;
    }

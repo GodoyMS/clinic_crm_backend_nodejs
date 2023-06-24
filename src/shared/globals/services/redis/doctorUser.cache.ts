@@ -14,7 +14,7 @@ export class UserCache extends BaseCache {
 
    public async saveToUserCache(key: string, userUId: string, createdUser: IUserDocument): Promise<void> {
       const createdAt = new Date();
-      const { _id, uId, dni, clinicId, email, phone, names, age, city, sex } =
+      const { _id, uId, dni, clinicId, email, phone, names, age, city, sex ,profileImage} =
          createdUser;
 
       const dataToSave = {
@@ -22,6 +22,7 @@ export class UserCache extends BaseCache {
          uId: `${uId}`,
          dni: `${dni}`,
          clinicId: `${clinicId}`,
+         profileImage: `${profileImage}`,
          email: `${email}`,
          phone: `${phone}`,
          names: `${names}`,
@@ -65,7 +66,7 @@ export class UserCache extends BaseCache {
 
    public async updateInfoAndSaveToUserCache (key:string,exisitingUser:IUserDocument):Promise<void>{
 
-      const { _id, uId, dni, clinicId, email, phone, names, age, city, sex } =
+      const { _id, uId, dni, clinicId, email, phone, names, age, city, sex,profileImage } =
       exisitingUser;
 
       const dataToSave = {
@@ -73,6 +74,7 @@ export class UserCache extends BaseCache {
          uId: `${uId}`,
          dni: `${dni}`,
          clinicId: `${clinicId}`,
+         profileImage: `${profileImage}`,
          email: `${email}`,
          phone: `${phone}`,
          names: `${names}`,
@@ -109,6 +111,7 @@ export class UserCache extends BaseCache {
          )) as unknown as IUserDocument;
          response.createdAt = new Date(Generators.parseJson(`${response.createdAt}`));
          response.clinicId = Generators.parseJson(`${response.clinicId}`);
+         response.profileImage= Generators.parseJson(`${response.profileImage}`);
          response.phone = Generators.parseJson(`${response.phone}`);
          response.names = Generators.parseJson(`${response.names}`);
          response.age = Generators.parseJson(`${response.age}`);

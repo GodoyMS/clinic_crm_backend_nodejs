@@ -70,6 +70,7 @@ export class UpdateConsent {
 
       try {
           await deleteFile(consentUrl);
+          
        } catch (error) {
          throw new BadRequestError('Could not delete file from cloudinary');
          }

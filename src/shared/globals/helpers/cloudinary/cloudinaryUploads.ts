@@ -10,11 +10,13 @@ export function uploads(
     cloudinary.v2.uploader.upload(
       file,
 
+
       {
         public_id,
         overwrite,
         resource_type:'auto',
-        invalidate
+        invalidate,
+        
       },
       (error: UploadApiErrorResponse | undefined, result: UploadApiResponse | undefined) => {
         if (error) {
