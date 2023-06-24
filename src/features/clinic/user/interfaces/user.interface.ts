@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { ObjectId } from 'mongodb';
 import { ILocation } from './location.interface';
+//SOLID INTERFACE SEGRETATION
 
 export interface IUser {
   _id: string | ObjectId;

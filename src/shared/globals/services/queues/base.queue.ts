@@ -8,8 +8,11 @@ import { IEmailJob } from '@clinic/user/interfaces/emailJob.interface';
 import { IUserJob } from '@clinic/user/interfaces/userJob.interface';
 import { IAuthJob as IAuthJobPatient }   from '@patient/auth/interfaces/authJob.interface';
 import { IUserJob as IUserJobPatient  } from '@patient/user/interfaces/userJob.interface';
-
-type IBaseJobData = IAuthJob | IEmailJob | IUserJob | IAuthJobPatient | IUserJobPatient ;
+import { IAuthJob as IAuthJobDoctor }   from '@doctor/auth/interfaces/authJob.interface';
+import { IUserJob as IUserJobDoctor  } from '@doctor/user/interfaces/userJob.interface';
+import { IAppointmentDocument } from '@root/features/appointment/interfaces/appointmentDocument.interface';
+import { IAppointmentJob } from '@root/features/appointment/interfaces/appointmentJob.interface';
+type IBaseJobData = IAuthJob | IEmailJob | IUserJob | IAuthJobPatient | IUserJobPatient |IAuthJobDoctor|IUserJobDoctor | IAppointmentDocument  | IAppointmentJob;
 
 let bullAdapters: BullAdapter[] = [];
 

@@ -1,4 +1,5 @@
 import { ObjectId } from 'mongodb';
+//SOLID INTERFACE SEGRETATION
 
 export interface ISignUpData {
   _id: ObjectId;

@@ -2,6 +2,7 @@ import express, { Router } from 'express';
 import { SignUpPatient } from '@patient/auth/controllers/signup';
 import { SignIn } from '@patient/auth/controllers/signin';
 import { SignOut } from '@patient/auth/controllers/signout';
+import { authMiddleware } from '@helpers/middlewares/auth-middleware';
 class AuthRoutes {
   private router: Router;
 
@@ -10,7 +11,9 @@ class AuthRoutes {
   }
 
   public routes(): Router {
-    this.router.post('/signup', SignUpPatient.prototype.create);
+    // Design Pattern Mediator: https://refactoring.guru/es/design-patterns/mediator
+    // Design Pattern Prototype: https://refactoring.guru/es/design-patterns/prototype
+   //  this.router.post('/signup',authMiddleware.verifyUser, SignUpPatient.prototype.create);
     this.router.post('/signin',SignIn.prototype.read);
 
     return this.router;

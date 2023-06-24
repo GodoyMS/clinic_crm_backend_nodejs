@@ -11,6 +11,11 @@ const signupSchema: ObjectSchema = Joi.object().keys({
    'string.base': 'Names must be of type string',
    'string.empty': 'Names is a required field'
  }),
+ sex:Joi.string().required().messages({
+   'string.base': 'Sex must be of type string',
+   'string.empty': 'Sex is a required field'
+
+ })
 
 
 

@@ -1,21 +1,19 @@
-
 declare global {
-  namespace Express {
-    interface Request {
-      currentUser?: AuthPayload;
-    }
-  }
+   namespace Express {
+      interface Request {
+         currentUser?: AuthPayload;
+         files?:any
+      }
+   }
 }
 
-
-
-
-
+//SOLID INTERFACE SEGRETATION
 
 export interface AuthPayload {
-  userId: string;
-  uId: string;
-  email: string;
+   userId: string;
+   uId: string;
+   email: string;
+   username:string,
 
-  iat?: number;
+   iat?: number;
 }

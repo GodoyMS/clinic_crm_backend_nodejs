@@ -3,6 +3,7 @@ import JWT from 'jsonwebtoken';
 import { IAuthDocument } from '@patient/auth/interfaces/authDocument.interface';
 import { config } from '@configs/configEnvs';
 import { ISignUpData } from '@patient/auth/interfaces/signUpData.interface';
+
 import { Generators } from '@helpers/generators/generators';
 import { IUserDocument } from '@patient/user/interfaces/userDocument.interface';
 
@@ -31,6 +32,8 @@ export abstract class SignUpUtility {
       createdAt: new Date()
     } as IAuthDocument;
   }
+
+
 
 
   protected userData(data: IAuthDocument, userObjectId: ObjectId): IUserDocument {

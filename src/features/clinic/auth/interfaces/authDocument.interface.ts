@@ -1,6 +1,8 @@
 import { Document } from 'mongoose';
 import { ObjectId } from 'mongodb';
 
+
+//SOLID INTERFACE SEGRETATION
 export interface IAuthDocument extends Document {
   _id: string | ObjectId;
   uId: string;

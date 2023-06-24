@@ -1,3 +1,5 @@
+//SOLID INTERFACE SEGRETATION
+
 export interface IBasicInfo {
   quote: string;
   work: string;

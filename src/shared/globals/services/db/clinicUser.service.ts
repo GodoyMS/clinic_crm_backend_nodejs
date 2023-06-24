@@ -21,6 +21,10 @@ class UserService {
    return user;
   }
 
+  public async deleteUserDocById(id: string): Promise<void> {
+      await UserModel.deleteOne({ _id: id }).exec();
+ }
+
   /*public async getUserByIdWithPopulate(userId: string): Promise<IUserDocument> {
     const user: IUserDocument = await UserModel
       .findOne({ _id: new mongoose.Types.ObjectId(userId) })
@@ -34,6 +38,7 @@ class UserService {
       username: '$authId.username',
       uId: '$authId.uId',
       email: '$authId.email',
+      createdAt: '$authId.createdAt',
       phone:1,
       location:1,
       specialty:1

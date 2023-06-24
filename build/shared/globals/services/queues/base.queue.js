@@ -21,8 +21,9 @@ class BaseQueue {
             serverAdapter: exports.serverAdapter
         });
         this.log = configLogs_1.logger.createLogger(`${queueName}Queue`);
-        this.queue.on('completed', (job) => {
-            //job.remove();
+        this.queue.on('completed',async (job) => {
+            await job.remove();
+            console.log(job+": removed")
         });
         this.queue.on('global:completed', (jobId) => {
             this.log.info(`Job ${jobId} completed`);

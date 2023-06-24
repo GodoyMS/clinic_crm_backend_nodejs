@@ -14,7 +14,6 @@ export class SignIn {
   public async read(req: Request, res: Response): Promise<void> {
     const { email, password } = req.body;
     const existingUser: IAuthDocument | undefined = await authService.getAuthUserByEmail(email);
-    console.log(existingUser);
 
     if (!existingUser) {
       throw new BadRequestError('Invalid credentials user not found');
@@ -30,7 +29,7 @@ export class SignIn {
     const userJwt: string = JWT.sign(
       {
         userId: existingUser._id,
-        uId: existingUser.uId,  
+        uId: existingUser.uId,
         email: existingUser.email,
         username: existingUser.username
       },

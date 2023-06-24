@@ -16,7 +16,6 @@ import { logger } from '@configs/configLogs';
 import { IErrorResponse } from '@helpers/errors/errorResponse.interface';
 import { CustomError } from '@helpers/errors/customError';
 import applicationRoutes from '@interfaces/http/routes';
-
 const log: Logger = logger.createLogger('server');
 
 export class ClinicsServer {
