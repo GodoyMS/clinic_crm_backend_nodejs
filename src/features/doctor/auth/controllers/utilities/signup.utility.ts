@@ -20,11 +20,12 @@ export abstract class SignUpUtility {
   }
 
   protected signUpData(data: ISignUpData): IAuthDocument {
-    const { _id,clinicId, uId,dni,names, password } = data;
+    const { _id,clinicId,job, uId,dni,names, password } = data;
     return {
       _id,
       clinicId,
       uId,
+      job,
       dni,
       names,
       password,

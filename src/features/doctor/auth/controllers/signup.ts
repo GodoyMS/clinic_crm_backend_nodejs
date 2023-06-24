@@ -22,7 +22,7 @@ const userCache: UserCache = new UserCache();
 export class SignUpDoctor extends SignUpUtility {
   @joiValidation(signupSchema)
   public async create(req: Request, res: Response): Promise<void> {
-    const { dni, names} = req.body;
+    const { dni, names,job} = req.body;
     const checkIfUserExist = await authService.getAuthUserByDni(dni);
     if (checkIfUserExist) {
       throw new BadRequestError('Invalid credentials for this user');
@@ -42,6 +42,7 @@ export class SignUpDoctor extends SignUpUtility {
       _id: authObjectId,
       clinicId:currentClinic.id,
       uId,
+      job,
       dni,
       names,
       password: randomPassword,
