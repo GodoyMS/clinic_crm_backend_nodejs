@@ -1,1 +1,0 @@
-{"version":3,"file":"fileTooLargeError.js","sourceRoot":"","sources":["../../../../../../src/shared/globals/helpers/errors/fileTooLargeError.ts"],"names":[],"mappings":";;;;;;AAAA,0EAA4C;AAC5C,+CAA4C;AAE5C,MAAa,iBAAkB,SAAQ,yBAAW;IAIhD,YAAY,OAAe;QACzB,KAAK,CAAC,OAAO,CAAC,CAAC;QAJjB,eAAU,GAAG,2BAAW,CAAC,gBAAgB,CAAC;QAC1C,WAAM,GAAG,OAAO,CAAC;IAIjB,CAAC;CACF;AAPD,8CAOC"}
