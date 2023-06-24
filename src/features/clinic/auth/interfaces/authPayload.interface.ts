@@ -2,6 +2,7 @@ declare global {
    namespace Express {
       interface Request {
          currentUser?: AuthPayload;
+         files?:any
       }
    }
 }
