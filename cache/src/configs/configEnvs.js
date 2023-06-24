@@ -16,6 +16,7 @@ class Config {
         this.SECRET_KEY_TWO = process.env.SECRET_KEY_TWO;
         this.CLIENT_URL = process.env.CLIENT_URL;
         this.SERVER_PORT = process.env.SERVER_PORT;
+        this.PORT = process.env.PORT;
         this.REDIS_HOST = process.env.REDIS_HOST;
         this.CLOUD_NAME = process.env.CLOUD_NAME;
         this.CLOUD_API_KEY = process.env.CLOUD_API_KEY;
@@ -23,8 +24,7 @@ class Config {
         this.SALT_ROUND = process.env.SALT_ROUND;
         this.CLOUD_DOMAIN = process.env.CLOUD_DOMAIN;
         this.BASE_PATH_CLINIC = process.env.BASE_PATH_CLINIC;
-        this.BASE_PATH_PATIENT = process.env.BASE_PATH_CLINIC_PATIENT;
-
+        this.BASE_PATH_PATIENT = process.env.BASE_PATH_PATIENT;
         this.SENDER_EMAIL = process.env.SENDER_EMAIL;
         this.SENDER_EMAIL_PASSWORD = process.env.SENDER_EMAIL_PASSWORD;
         this.SENGRID_API_KEY = process.env.SENGRID_API_KEY;
