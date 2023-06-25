@@ -12,8 +12,13 @@
     "lint:fix  ": "npx eslint --fix .",
     "prettier:check": "prettier --check src/**/*.{ts,json}",
     "prettier:fix": "prettier --write src/**/*.{ts,json}",
+    "clean": "rimraf cache dist",
+    "build:pro": "yarn run clean && yarn run build && gulp minifyAndOfuscate",
+
     "format": "prettier --ignore-path .gitignore node_modules --write.",
-    "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json"
+    "build": "ttsc -p .",
+    "prod": "node dist/src/app.js"
+
   },
   "keywords": [],
   "author": "",
