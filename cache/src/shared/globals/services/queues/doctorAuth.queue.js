@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authQueue = void 0;
 const base_queue_1 = require("./base.queue");
-const doctorAuth_worker_1 = require("../../workers/doctorAuth.worker");
+const doctorAuth_worker_1 = require("@workers/doctorAuth.worker");
 class AuthQueue extends base_queue_1.BaseQueue {
     constructor() {
         super('authDoctor');

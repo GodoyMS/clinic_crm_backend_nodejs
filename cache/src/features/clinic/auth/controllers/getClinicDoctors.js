@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GetClinicDoctors = void 0;
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
-const clinicActions_1 = require("../../../../shared/globals/services/db/clinicActions/clinicActions");
+const clinicActions_1 = require("@services/db/clinicActions/clinicActions");
 class GetClinicDoctors {
     read(req, res) {
         return __awaiter(this, void 0, void 0, function* () {

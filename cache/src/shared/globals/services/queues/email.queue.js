@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.emailQueue = void 0;
 const base_queue_1 = require("./base.queue");
-const email_worker_1 = require("../../workers/email.worker");
+const email_worker_1 = require("@workers/email.worker");
 class EmailQueue extends base_queue_1.BaseQueue {
     constructor() {
         super('emails');

@@ -11,7 +11,7 @@ function uploads(file, public_id, overwrite, invalidate) {
             public_id,
             overwrite,
             resource_type: 'auto',
-            invalidate
+            invalidate,
         }, (error, result) => {
             if (error) {
                 resolve(error);

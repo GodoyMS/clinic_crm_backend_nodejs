@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Generators = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
-const configEnvs_1 = require("../../../../configs/configEnvs");
+const configEnvs_1 = require("@configs/configEnvs");
 class Generators {
     static firstLetterUppercase(str) {
         const valueString = str.toLowerCase();

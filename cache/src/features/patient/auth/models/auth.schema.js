@@ -16,7 +16,7 @@ exports.AuthModel = void 0;
 const bcryptjs_1 = require("bcryptjs");
 const mongoose_1 = require("mongoose");
 const mongoose_2 = __importDefault(require("mongoose"));
-//import { config } from '../../../../configs/configEnvs';
+//import { config } from '@configs/configEnvs';
 // Design Pattern AAA / Security for Design (SBD): https://www.ticportal.es/glosario-tic/seguridad-diseno-sbd
 const authSchema = new mongoose_1.Schema({
     clinicId: { type: mongoose_2.default.Schema.Types.ObjectId, ref: 'UserClinic' },

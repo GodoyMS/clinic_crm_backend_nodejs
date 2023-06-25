@@ -25,10 +25,10 @@ const http_status_codes_1 = __importDefault(require("http-status-codes"));
 const socket_io_1 = require("socket.io");
 const redis_1 = require("redis");
 const redis_adapter_1 = require("@socket.io/redis-adapter");
-const configEnvs_1 = require("../configs/configEnvs");
-const configLogs_1 = require("../configs/configLogs");
-const customError_1 = require("../shared/globals/helpers/errors/customError");
-const routes_1 = __importDefault(require("../interfaces/http/routes"));
+const configEnvs_1 = require("@configs/configEnvs");
+const configLogs_1 = require("@configs/configLogs");
+const customError_1 = require("@helpers/errors/customError");
+const routes_1 = __importDefault(require("@interfaces/http/routes"));
 const log = configLogs_1.logger.createLogger('server');
 class ClinicsServer {
     constructor(app) {

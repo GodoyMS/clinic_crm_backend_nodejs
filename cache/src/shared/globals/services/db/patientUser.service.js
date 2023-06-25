@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userService = void 0;
-const auth_schema_1 = require("../../../../features/patient/auth/models/auth.schema");
-const user_schema_1 = require("../../../../features/patient/user/models/user.schema");
+const auth_schema_1 = require("@patient/auth/models/auth.schema");
+const user_schema_1 = require("@patient/user/models/user.schema");
 const mongoose_1 = __importDefault(require("mongoose"));
 class UserService {
     addUserData(data) {

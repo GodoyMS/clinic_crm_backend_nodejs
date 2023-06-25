@@ -14,10 +14,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.mailTransport = void 0;
 const nodemailer_1 = __importDefault(require("nodemailer"));
-const configLogs_1 = require("../../../../configs/configLogs");
+const configLogs_1 = require("@configs/configLogs");
 const mail_1 = __importDefault(require("@sendgrid/mail"));
-const badRequestError_1 = require("../../helpers/errors/badRequestError");
-const configEnvs_1 = require("../../../../configs/configEnvs");
+const badRequestError_1 = require("@helpers/errors/badRequestError");
+const configEnvs_1 = require("@configs/configEnvs");
 const log = configLogs_1.logger.createLogger('mailOptions');
 mail_1.default.setApiKey(configEnvs_1.config.SENGRID_API_KEY);
 class MailTransport {

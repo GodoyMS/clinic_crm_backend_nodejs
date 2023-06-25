@@ -23,18 +23,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SignUpDoctor = void 0;
 const mongodb_1 = require("mongodb");
-const joi_validation_decorators_1 = require("../../../../shared/globals/decorators/joi-validation.decorators");
-const signup_1 = require("../../auth/schemes/signup");
-const doctorAuth_service_1 = require("../../../../shared/globals/services/db/doctorAuth.service");
-const doctorUser_cache_1 = require("../../../../shared/globals/services/redis/doctorUser.cache");
-const badRequestError_1 = require("../../../../shared/globals/helpers/errors/badRequestError");
-const generators_1 = require("../../../../shared/globals/helpers/generators/generators");
+const joi_validation_decorators_1 = require("@decorators/joi-validation.decorators");
+const signup_1 = require("@doctor/auth/schemes/signup");
+const doctorAuth_service_1 = require("@services/db/doctorAuth.service");
+const doctorUser_cache_1 = require("@services/redis/doctorUser.cache");
+const badRequestError_1 = require("@helpers/errors/badRequestError");
+const generators_1 = require("@helpers/generators/generators");
 const lodash_1 = require("lodash");
-const doctorUser_queue_1 = require("../../../../shared/globals/services/queues/doctorUser.queue");
-const doctorAuth_queue_1 = require("../../../../shared/globals/services/queues/doctorAuth.queue");
+const doctorUser_queue_1 = require("@services/queues/doctorUser.queue");
+const doctorAuth_queue_1 = require("@services/queues/doctorAuth.queue");
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
 const signup_utility_1 = require("./utilities/signup.utility");
-const clinicUser_service_1 = require("../../../../shared/globals/services/db/clinicUser.service");
+const clinicUser_service_1 = require("@services/db/clinicUser.service");
 const userCache = new doctorUser_cache_1.UserCache();
 class SignUpDoctor extends signup_utility_1.SignUpUtility {
     create(req, res) {

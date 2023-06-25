@@ -13,10 +13,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DeleteUserDoctor = void 0;
-const doctorUser_service_1 = require("../../../../shared/globals/services/db/doctorUser.service");
+const doctorUser_service_1 = require("@services/db/doctorUser.service");
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
-const doctorUser_cache_1 = require("../../../../shared/globals/services/redis/doctorUser.cache");
-const badRequestError_1 = require("../../../../shared/globals/helpers/errors/badRequestError");
+const doctorUser_cache_1 = require("@services/redis/doctorUser.cache");
+const badRequestError_1 = require("@helpers/errors/badRequestError");
+const deleteCloudinaryFileByURL_1 = require("@helpers/cloudinary/deleteCloudinaryFileByURL");
 const userCache = new doctorUser_cache_1.UserCache();
 class DeleteUserDoctor {
     delete(req, res) {
@@ -25,6 +26,12 @@ class DeleteUserDoctor {
             const existingDoctor = yield doctorUser_service_1.userService.deleteUserDocById(doctorID);
             if (!existingDoctor) {
                 throw new badRequestError_1.BadRequestError('Invalid credentials');
+            }
+            try {
+                yield (0, deleteCloudinaryFileByURL_1.deleteFile)(existingDoctor.profileImage);
+            }
+            catch (error) {
+                throw new badRequestError_1.BadRequestError('Could not delete file from cloudinary');
             }
             const existingAuthDoctor = yield doctorUser_service_1.userService.deleteUserAuthById(doctorID);
             if (!existingAuthDoctor) {

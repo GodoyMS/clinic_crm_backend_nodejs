@@ -15,13 +15,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Appointment = void 0;
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
 const mongodb_1 = require("mongodb");
-const clinicUser_service_1 = require("../../../../shared/globals/services/db/clinicUser.service");
-const doctorUser_service_1 = require("../../../../shared/globals/services/db/doctorUser.service");
-const patientUser_service_1 = require("../../../../shared/globals/services/db/patientUser.service");
-const badRequestError_1 = require("../../../../shared/globals/helpers/errors/badRequestError");
-const clinicUser_cache_1 = require("../../../../shared/globals/services/redis/clinicUser.cache");
+const clinicUser_service_1 = require("@services/db/clinicUser.service");
+const doctorUser_service_1 = require("@services/db/doctorUser.service");
+const patientUser_service_1 = require("@services/db/patientUser.service");
+const badRequestError_1 = require("@helpers/errors/badRequestError");
+const clinicUser_cache_1 = require("@services/redis/clinicUser.cache");
 const appointment_utility_1 = require("./utilities/appointment.utility");
-const appointment_queue_1 = require("../../../../shared/globals/services/queues/appointment.queue");
+const appointment_queue_1 = require("@services/queues/appointment.queue");
 const userCache = new clinicUser_cache_1.UserCache();
 class Appointment extends appointment_utility_1.AppointmentUtility {
     create(req, res) {

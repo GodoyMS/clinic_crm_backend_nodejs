@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.redisConnection = void 0;
-const configLogs_1 = require("../../../../configs/configLogs");
+const configLogs_1 = require("@configs/configLogs");
 const base_cache_1 = require("./base.cache");
 const log = configLogs_1.logger.createLogger('redisConnection');
 // Design Pattern Singleton: https://refactoring.guru/es/design-patterns/singleton

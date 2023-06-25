@@ -6,8 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BaseQueue = exports.serverAdapter = void 0;
 const bull_1 = __importDefault(require("bull"));
 const express_1 = require("@bull-board/express");
-const configEnvs_1 = require("../../../../configs/configEnvs");
-const configLogs_1 = require("../../../../configs/configLogs");
+const configEnvs_1 = require("@configs/configEnvs");
+const configLogs_1 = require("@configs/configLogs");
 let bullAdapters = [];
 class BaseQueue {
     constructor(queueName) {

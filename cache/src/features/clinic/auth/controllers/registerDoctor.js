@@ -14,18 +14,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RegisterDoctor = void 0;
 const mongodb_1 = require("mongodb");
-const doctorAuth_service_1 = require("../../../../shared/globals/services/db/doctorAuth.service");
-const doctorUser_cache_1 = require("../../../../shared/globals/services/redis/doctorUser.cache");
-const badRequestError_1 = require("../../../../shared/globals/helpers/errors/badRequestError");
-const generators_1 = require("../../../../shared/globals/helpers/generators/generators");
+const doctorAuth_service_1 = require("@services/db/doctorAuth.service");
+const doctorUser_cache_1 = require("@services/redis/doctorUser.cache");
+const badRequestError_1 = require("@helpers/errors/badRequestError");
+const generators_1 = require("@helpers/generators/generators");
 const lodash_1 = require("lodash");
-const doctorUser_queue_1 = require("../../../../shared/globals/services/queues/doctorUser.queue");
-const doctorAuth_queue_1 = require("../../../../shared/globals/services/queues/doctorAuth.queue");
+const doctorUser_queue_1 = require("@services/queues/doctorUser.queue");
+const doctorAuth_queue_1 = require("@services/queues/doctorAuth.queue");
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
-const clinicUser_service_1 = require("../../../../shared/globals/services/db/clinicUser.service");
+const clinicUser_service_1 = require("@services/db/clinicUser.service");
 const signup_utility_1 = require("./utilities/signup.utility");
-const cloudinaryUploads_1 = require("../../../../shared/globals/helpers/cloudinary/cloudinaryUploads");
-const configEnvs_1 = require("../../../../configs/configEnvs");
+const cloudinaryUploads_1 = require("@helpers/cloudinary/cloudinaryUploads");
+const configEnvs_1 = require("@configs/configEnvs");
 const userCache = new doctorUser_cache_1.UserCache();
 class RegisterDoctor extends signup_utility_1.SignUpUtility {
     //   @joiValidation(signupSchema)

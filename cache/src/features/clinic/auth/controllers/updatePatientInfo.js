@@ -14,9 +14,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdatePatientInfo = void 0;
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
-const patientUser_service_1 = require("../../../../shared/globals/services/db/patientUser.service");
-const badRequestError_1 = require("../../../../shared/globals/helpers/errors/badRequestError");
-const patientUser_cache_1 = require("../../../../shared/globals/services/redis/patientUser.cache");
+const patientUser_service_1 = require("@services/db/patientUser.service");
+const badRequestError_1 = require("@helpers/errors/badRequestError");
+const patientUser_cache_1 = require("@services/redis/patientUser.cache");
 const userCache = new patientUser_cache_1.UserCache();
 class UpdatePatientInfo {
     update(req, res) {

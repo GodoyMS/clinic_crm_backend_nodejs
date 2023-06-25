@@ -11,9 +11,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserCache = void 0;
 const base_cache_1 = require("./base.cache");
-const configLogs_1 = require("../../../../configs/configLogs");
-const serverError_1 = require("../../helpers/errors/serverError");
-const generators_1 = require("../../helpers/generators/generators");
+const configLogs_1 = require("@configs/configLogs");
+const serverError_1 = require("@helpers/errors/serverError");
+const generators_1 = require("@helpers/generators/generators");
 const log = configLogs_1.logger.createLogger('userCache');
 class UserCache extends base_cache_1.BaseCache {
     constructor() {

@@ -4,9 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
-const configEnvs_1 = require("../configs/configEnvs");
-const configLogs_1 = require("../configs/configLogs");
-const redis_connection_1 = require("../shared/globals/services/redis/redis.connection");
+const configEnvs_1 = require("@configs/configEnvs");
+const configLogs_1 = require("@configs/configLogs");
+const redis_connection_1 = require("@services/redis/redis.connection");
 const log = configLogs_1.logger.createLogger('setupDatabase');
 // Design Pattern Singleton: https://refactoring.guru/es/design-patterns/singleton
 exports.default = () => {

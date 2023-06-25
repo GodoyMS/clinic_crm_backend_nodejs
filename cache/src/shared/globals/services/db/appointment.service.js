@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.appointmentService = void 0;
-const appointment_schema_1 = require("../../../../features/appointment/model/appointment.schema");
+const appointment_schema_1 = require("@root/features/appointment/model/appointment.schema");
 class AppointmentService {
     createAppointment(data) {
         return __awaiter(this, void 0, void 0, function* () {

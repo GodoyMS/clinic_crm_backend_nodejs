@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userService = void 0;
-const auth_schema_1 = require("../../../../features/doctor/auth/models/auth.schema");
-const user_schema_1 = require("../../../../features/doctor/user/models/user.schema");
+const auth_schema_1 = require("@doctor/auth/models/auth.schema");
+const user_schema_1 = require("@doctor/user/models/user.schema");
 const mongoose_1 = __importDefault(require("mongoose"));
 class UserService {
     addUserData(data) {
@@ -42,6 +42,12 @@ class UserService {
     deleteUserDocById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const user = (yield user_schema_1.UserModel.findByIdAndRemove(id).exec());
+            return user;
+        });
+    }
+    updateProfileImageById(id, url) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const user = (yield user_schema_1.UserModel.findByIdAndUpdate(id, { profileImage: url }, { new: true }).exec());
             return user;
         });
     }

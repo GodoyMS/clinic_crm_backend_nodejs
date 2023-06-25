@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthModel = void 0;
 const bcryptjs_1 = require("bcryptjs");
 const mongoose_1 = require("mongoose");
-//import { config } from '../../../../configs/configEnvs';
+//import { config } from '@configs/configEnvs';
 // Design Pattern AAA / Security for Design (SBD): https://www.ticportal.es/glosario-tic/seguridad-diseno-sbd
 const authSchema = new mongoose_1.Schema({
     username: { type: 'String' },

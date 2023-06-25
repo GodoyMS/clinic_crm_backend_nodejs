@@ -11,9 +11,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserCache = void 0;
 const base_cache_1 = require("./base.cache");
-const configLogs_1 = require("../../../../configs/configLogs");
-const serverError_1 = require("../../helpers/errors/serverError");
-const generators_1 = require("../../helpers/generators/generators");
+const configLogs_1 = require("@configs/configLogs");
+const serverError_1 = require("@helpers/errors/serverError");
+const generators_1 = require("@helpers/generators/generators");
 const log = configLogs_1.logger.createLogger('userDoctorCache');
 class UserCache extends base_cache_1.BaseCache {
     constructor() {
@@ -22,12 +22,13 @@ class UserCache extends base_cache_1.BaseCache {
     saveToUserCache(key, userUId, createdUser) {
         return __awaiter(this, void 0, void 0, function* () {
             const createdAt = new Date();
-            const { _id, uId, dni, clinicId, email, phone, names, age, city, sex } = createdUser;
+            const { _id, uId, dni, clinicId, email, phone, names, age, city, sex, profileImage } = createdUser;
             const dataToSave = {
                 _id: `${_id}`,
                 uId: `${uId}`,
                 dni: `${dni}`,
                 clinicId: `${clinicId}`,
+                profileImage: `${profileImage}`,
                 email: `${email}`,
                 phone: `${phone}`,
                 names: `${names}`,
@@ -67,12 +68,13 @@ class UserCache extends base_cache_1.BaseCache {
     }
     updateInfoAndSaveToUserCache(key, exisitingUser) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { _id, uId, dni, clinicId, email, phone, names, age, city, sex } = exisitingUser;
+            const { _id, uId, dni, clinicId, email, phone, names, age, city, sex, profileImage } = exisitingUser;
             const dataToSave = {
                 _id: `${_id}`,
                 uId: `${uId}`,
                 dni: `${dni}`,
                 clinicId: `${clinicId}`,
+                profileImage: `${profileImage}`,
                 email: `${email}`,
                 phone: `${phone}`,
                 names: `${names}`,
@@ -104,6 +106,7 @@ class UserCache extends base_cache_1.BaseCache {
                 const response = (yield this.client.HGETALL(`usersDoctor:${userId}`));
                 response.createdAt = new Date(generators_1.Generators.parseJson(`${response.createdAt}`));
                 response.clinicId = generators_1.Generators.parseJson(`${response.clinicId}`);
+                response.profileImage = generators_1.Generators.parseJson(`${response.profileImage}`);
                 response.phone = generators_1.Generators.parseJson(`${response.phone}`);
                 response.names = generators_1.Generators.parseJson(`${response.names}`);
                 response.age = generators_1.Generators.parseJson(`${response.age}`);

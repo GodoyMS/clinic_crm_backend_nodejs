@@ -5,11 +5,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authRoutesClinic = void 0;
 const express_1 = __importDefault(require("express"));
-const signup_1 = require("../../auth/controllers/signup");
-const signin_1 = require("../../auth/controllers/signin");
-const signout_1 = require("../../auth/controllers/signout");
+const signup_1 = require("@clinic/auth/controllers/signup");
+const signin_1 = require("@clinic/auth/controllers/signin");
+const signout_1 = require("@clinic/auth/controllers/signout");
 const deleteClinic_1 = require("../controllers/deleteClinic");
-const auth_middleware_1 = require("../../../../shared/globals/helpers/middlewares/auth-middleware");
+const auth_middleware_1 = require("@helpers/middlewares/auth-middleware");
 class AuthRoutes {
     constructor() {
         this.router = express_1.default.Router();

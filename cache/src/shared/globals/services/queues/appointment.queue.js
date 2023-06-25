@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.appointmentQueue = void 0;
 const base_queue_1 = require("./base.queue");
-const appointment_worker_1 = require("../../workers/appointment.worker");
+const appointment_worker_1 = require("@workers/appointment.worker");
 class AppointmentQueue extends base_queue_1.BaseQueue {
     constructor() {
         super('appointment');

@@ -9,10 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const auth_mock_1 = require("../../../../../shared/globals/mocks/auth.mock");
-const auth_mock_2 = require("../../../../../shared/globals/mocks/auth.mock");
+const auth_mock_1 = require("@root/shared/globals/mocks/auth.mock");
+const auth_mock_2 = require("@root/shared/globals/mocks/auth.mock");
 const signup_1 = require("../signup");
-const clinicAuth_service_1 = require("../../../../../shared/globals/services/db/clinicAuth.service");
+const clinicAuth_service_1 = require("@services/db/clinicAuth.service");
 jest.useFakeTimers();
 jest.mock('@services/queues/base.queue');
 jest.mock('@helpers/cloudinary/cloudinaryUploads');

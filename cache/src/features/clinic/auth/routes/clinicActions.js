@@ -5,13 +5,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.clinicAuthActionsRoutes = void 0;
 const express_1 = __importDefault(require("express"));
-const auth_middleware_1 = require("../../../../shared/globals/helpers/middlewares/auth-middleware");
-const updateAuth_1 = require("../../auth/controllers/updateAuth");
+const auth_middleware_1 = require("@helpers/middlewares/auth-middleware");
+const updateAuth_1 = require("@clinic/auth/controllers/updateAuth");
 const getClinicPatients_1 = require("../controllers/getClinicPatients");
 const registerPatient_1 = require("../controllers/registerPatient");
 const updatePatientInfo_1 = require("../controllers/updatePatientInfo");
 const updateClinicHistory_1 = require("../controllers/updateClinicHistory");
-const storage_1 = require("../../../../shared/globals/helpers/multer/storage");
+const storage_1 = require("@helpers/multer/storage");
 const updateOdontogram_1 = require("../controllers/updateOdontogram");
 const updateConsent_1 = require("../controllers/updateConsent");
 const deletePatientById_1 = require("../controllers/deletePatientById");
@@ -23,6 +23,7 @@ const getClinicAppointments_1 = require("../controllers/getClinicAppointments");
 const deleteAppointmentById_1 = require("../controllers/deleteAppointmentById");
 const getAppointmentById_1 = require("../controllers/getAppointmentById");
 const deleteManyAppointmentsById_1 = require("../controllers/deleteManyAppointmentsById");
+const updateDoctor_1 = require("../controllers/updateDoctor");
 // const upload = multer({ dest: 'uploads/' });
 class ClinicAuthActionsRoutes {
     constructor() {
@@ -53,6 +54,7 @@ class ClinicAuthActionsRoutes {
         this.router.post('/doctor/registerDoctor', auth_middleware_1.authMiddleware.checkAuthentication, registerDoctor_1.RegisterDoctor.prototype.create);
         this.router.get('/doctor/getClinicDoctors', auth_middleware_1.authMiddleware.checkAuthentication, getClinicDoctors_1.GetClinicDoctors.prototype.read);
         this.router.delete('/doctor/deleteClinicDoctor/:id', auth_middleware_1.authMiddleware.checkAuthentication, deletDoctorById_1.DeleteUserDoctor.prototype.delete);
+        this.router.put('/doctor/updateClinicDoctorProfileImage/:id', auth_middleware_1.authMiddleware.checkAuthentication, updateDoctor_1.UpdateDoctor.prototype.updateProfileById);
         return this.router;
     }
     appointmentActions() {

@@ -13,10 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DeleteUserPatient = void 0;
-const patientUser_service_1 = require("../../../../shared/globals/services/db/patientUser.service");
+const patientUser_service_1 = require("@services/db/patientUser.service");
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
-const patientUser_cache_1 = require("../../../../shared/globals/services/redis/patientUser.cache");
-const badRequestError_1 = require("../../../../shared/globals/helpers/errors/badRequestError");
+const patientUser_cache_1 = require("@services/redis/patientUser.cache");
+const badRequestError_1 = require("@helpers/errors/badRequestError");
 const userCache = new patientUser_cache_1.UserCache();
 class DeleteUserPatient {
     delete(req, res) {

@@ -10,11 +10,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.clinicActionsService = void 0;
-const auth_schema_1 = require("../../../../../features/clinic/auth/models/auth.schema");
-const user_schema_1 = require("../../../../../features/patient/user/models/user.schema");
-const user_schema_2 = require("../../../../../features/doctor/user/models/user.schema");
-const generators_1 = require("../../../helpers/generators/generators");
-const appointment_schema_1 = require("../../../../../features/appointment/model/appointment.schema");
+const auth_schema_1 = require("@clinic/auth/models/auth.schema");
+const user_schema_1 = require("@patient/user/models/user.schema");
+const user_schema_2 = require("@doctor/user/models/user.schema");
+const generators_1 = require("@helpers/generators/generators");
+const appointment_schema_1 = require("@root/features/appointment/model/appointment.schema");
 class ClinicActionsService {
     getAuthClinicByEmail(email) {
         return __awaiter(this, void 0, void 0, function* () {

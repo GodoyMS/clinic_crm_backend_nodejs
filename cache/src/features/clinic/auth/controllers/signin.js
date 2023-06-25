@@ -22,13 +22,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SignIn = void 0;
-const configEnvs_1 = require("../../../../configs/configEnvs");
+const configEnvs_1 = require("@configs/configEnvs");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const joi_validation_decorators_1 = require("../../../../shared/globals/decorators/joi-validation.decorators");
+const joi_validation_decorators_1 = require("@decorators/joi-validation.decorators");
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
-const clinicAuth_service_1 = require("../../../../shared/globals/services/db/clinicAuth.service");
-const badRequestError_1 = require("../../../../shared/globals/helpers/errors/badRequestError");
-const signin_1 = require("../../auth/schemes/signin");
+const clinicAuth_service_1 = require("@services/db/clinicAuth.service");
+const badRequestError_1 = require("@helpers/errors/badRequestError");
+const signin_1 = require("@clinic/auth/schemes/signin");
 class SignIn {
     read(req, res) {
         return __awaiter(this, void 0, void 0, function* () {

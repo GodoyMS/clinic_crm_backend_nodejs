@@ -14,13 +14,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateOdontogram = void 0;
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
-const patientUser_service_1 = require("../../../../shared/globals/services/db/patientUser.service");
-const badRequestError_1 = require("../../../../shared/globals/helpers/errors/badRequestError");
-const patientUser_cache_1 = require("../../../../shared/globals/services/redis/patientUser.cache");
-const cloudinaryUploads_1 = require("../../../../shared/globals/helpers/cloudinary/cloudinaryUploads");
+const patientUser_service_1 = require("@services/db/patientUser.service");
+const badRequestError_1 = require("@helpers/errors/badRequestError");
+const patientUser_cache_1 = require("@services/redis/patientUser.cache");
+const cloudinaryUploads_1 = require("@helpers/cloudinary/cloudinaryUploads");
 const mongodb_1 = require("mongodb");
 const fs_1 = __importDefault(require("fs"));
-const deleteCloudinaryFileByURL_1 = require("../../../../shared/globals/helpers/cloudinary/deleteCloudinaryFileByURL");
+const deleteCloudinaryFileByURL_1 = require("@helpers/cloudinary/deleteCloudinaryFileByURL");
 const userCache = new patientUser_cache_1.UserCache();
 class UpdateOdontogram {
     upload(req, res) {

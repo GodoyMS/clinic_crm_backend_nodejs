@@ -13,10 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DeleteManyAppointments = void 0;
-const clinicUser_service_1 = require("../../../../shared/globals/services/db/clinicUser.service");
-const appointment_service_1 = require("../../../../shared/globals/services/db/appointment.service");
+const clinicUser_service_1 = require("@services/db/clinicUser.service");
+const appointment_service_1 = require("@services/db/appointment.service");
 const http_status_codes_1 = __importDefault(require("http-status-codes"));
-const badRequestError_1 = require("../../../../shared/globals/helpers/errors/badRequestError");
+const badRequestError_1 = require("@helpers/errors/badRequestError");
 class DeleteManyAppointments {
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {

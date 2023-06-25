@@ -10,8 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.emailWorker = exports.EmailWorker = void 0;
-const mail_transport_1 = require("../services/email/mail.transport");
-const configLogs_1 = require("../../../configs/configLogs");
+const mail_transport_1 = require("@services/email/mail.transport");
+const configLogs_1 = require("@configs/configLogs");
 const log = configLogs_1.logger.createLogger('Email worker');
 class EmailWorker {
     addNotificationEmail(job, done) {

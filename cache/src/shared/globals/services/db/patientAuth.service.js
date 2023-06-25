@@ -10,8 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authService = void 0;
-const auth_schema_1 = require("../../../../features/patient/auth/models/auth.schema");
-const generators_1 = require("../../helpers/generators/generators");
+const auth_schema_1 = require("@patient/auth/models/auth.schema");
+const generators_1 = require("@helpers/generators/generators");
 class AuthService {
     createAuthUser(data) {
         return __awaiter(this, void 0, void 0, function* () {

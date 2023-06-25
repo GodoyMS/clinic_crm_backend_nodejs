@@ -10,8 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userWorker = void 0;
-const configLogs_1 = require("../../../configs/configLogs");
-const clinicUser_service_1 = require("../services/db/clinicUser.service");
+const configLogs_1 = require("@configs/configLogs");
+const clinicUser_service_1 = require("@services/db/clinicUser.service");
 const log = configLogs_1.logger.createLogger('userWorker');
 class UserWorker {
     addUserToDB(job, done) {

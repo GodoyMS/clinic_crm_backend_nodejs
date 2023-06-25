@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.joiValidation = void 0;
-const joiValidateError_1 = require("../helpers/errors/joiValidateError");
+const joiValidateError_1 = require("@helpers/errors/joiValidateError");
 function joiValidation(schema) {
     return (_target, _key, descriptor) => {
         const originalMethod = descriptor.value;
