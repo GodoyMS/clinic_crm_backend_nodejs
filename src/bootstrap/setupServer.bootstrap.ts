@@ -52,7 +52,7 @@ export class ClinicsServer {
         maxAge: 24 * 7 * 3600000,
         secure: config.NODE_ENV !== 'development',
         httpOnly:true,
-        domain:'https://clinic-crm-backend-2280319575fe.herokuapp.com'
+        domain:'clinic-crm-backend-2280319575fe.herokuapp.com'
 
       })
     );
