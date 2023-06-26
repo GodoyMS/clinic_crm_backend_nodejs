@@ -51,7 +51,8 @@ export class ClinicsServer {
         keys: [config.SECRET_KEY_ONE!, config.SECRET_KEY_TWO!],
         maxAge: 24 * 7 * 3600000,
         secure: config.NODE_ENV !== 'development',
-        httpOnly:true
+        httpOnly:true,
+        domain:config.CLIENT_URL
 
       })
     );
