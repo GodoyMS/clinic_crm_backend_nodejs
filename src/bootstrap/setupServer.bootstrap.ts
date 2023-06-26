@@ -35,16 +35,7 @@ export class ClinicsServer {
 
   private securityMiddleware(app: Application): void {
     // Design pattern Synchronizer Token Pattern: https://medium.com/@kaviru.mihisara/synchronizer-token-pattern-e6b23f53518e
-    app.use(
-      cookieSession({
-        name: 'session',
-        keys: [config.SECRET_KEY_ONE!, config.SECRET_KEY_TWO!],
-        maxAge: 24 * 7 * 3600000,
-        secure: config.NODE_ENV !== 'development'
-      })
-    );
-    app.use(hpp());
-    app.use(helmet());
+
     app.use(
       cors({
         origin: config.CLIENT_URL,
@@ -53,6 +44,19 @@ export class ClinicsServer {
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS','PATCH']
       })
     );
+    app.use(
+      cookieSession({
+        name: 'session',
+
+        keys: [config.SECRET_KEY_ONE!, config.SECRET_KEY_TWO!],
+        maxAge: 24 * 7 * 3600000,
+        secure: config.NODE_ENV !== 'development',
+        httpOnly:true
+
+      })
+    );
+    app.use(hpp());
+    app.use(helmet());
   }
 
   private standardMiddleware(app: Application): void {
