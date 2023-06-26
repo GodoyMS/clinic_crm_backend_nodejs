@@ -56,8 +56,8 @@ export class ClinicsServer {
 
       })
     );
-    app.use(hpp());
-    app.use(helmet());
+   //  app.use(hpp());
+   //  app.use(helmet());
   }
 
   private standardMiddleware(app: Application): void {
