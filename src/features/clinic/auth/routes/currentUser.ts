@@ -1,7 +1,6 @@
 import express, { Router } from 'express';
-import { AuthMiddleware, authMiddleware } from '@helpers/middlewares/auth-middleware';
+import {  authMiddleware } from '@helpers/middlewares/auth-middleware';
 import { CurrentUser } from '@clinic/auth/controllers/currentUser';
-import { UpdateAuth } from '@clinic/auth/controllers/updateAuth';
 class CurrentUserRoutesClinic {
    private router: Router;
    constructor() {

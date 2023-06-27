@@ -3,5 +3,5 @@ import { IUserDocument } from '@patient/user/interfaces/userDocument.interface';
 //SOLID INTERFACE SEGRETATION
 
 export interface IAuthJob {
-  value?: string | IAuthDocument | IUserDocument;
+   value?: string | IAuthDocument | IUserDocument;
 }

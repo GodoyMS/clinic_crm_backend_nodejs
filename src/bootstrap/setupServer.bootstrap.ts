@@ -19,120 +19,105 @@ import applicationRoutes from '@interfaces/http/routes';
 const log: Logger = logger.createLogger('server');
 
 export class ClinicsServer {
-  private app: Application;
+   private app: Application;
 
-  constructor(app: Application) {
-    this.app = app;
-  }
+   constructor(app: Application) {
+      this.app = app;
+   }
 
-  public start(): void {
-    this.securityMiddleware(this.app);
-    this.standardMiddleware(this.app);
-    this.routesMiddleware(this.app);
-    this.globalErrorHandler(this.app);
-    this.startServer(this.app);
-  }
+   public start(): void {
+      this.securityMiddleware(this.app);
+      this.standardMiddleware(this.app);
+      this.routesMiddleware(this.app);
+      this.globalErrorHandler(this.app);
+      this.startServer(this.app);
+   }
 
-  private securityMiddleware(app: Application): void {
-    // Design pattern Synchronizer Token Pattern: https://medium.com/@kaviru.mihisara/synchronizer-token-pattern-e6b23f53518e
-    app.use(
-      cookieSession({
-        name: 'session',
+   private securityMiddleware(app: Application): void {
+      // Design pattern Synchronizer Token Pattern: https://medium.com/@kaviru.mihisara/synchronizer-token-pattern-e6b23f53518e
+      app.use(
+         cookieSession({
+            name: 'session',
 
-        keys: [config.SECRET_KEY_ONE!, config.SECRET_KEY_TWO!],
-        maxAge: 24 * 7 * 3600000,
-        secure: config.NODE_ENV !== 'development',
-        sameSite:'none'
+            keys: [config.SECRET_KEY_ONE!, config.SECRET_KEY_TWO!],
+            maxAge: 24 * 7 * 3600000,
+            secure: config.NODE_ENV !== 'development',
+            sameSite: 'none',
+         }),
+      );
+      app.use(
+         cors({
+            origin: config.CLIENT_URL,
+            credentials: true,
+            optionsSuccessStatus: 200,
+            methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+         }),
+      );
 
+      app.use(hpp());
+      app.use(helmet());
+   }
 
-      })
-    );
-    app.use(
-      cors({
-        origin: config.CLIENT_URL,
-        credentials: true,
-        optionsSuccessStatus: 200,
-        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS','PATCH']
-      })
-    );
+   private standardMiddleware(app: Application): void {
+      app.use(compression());
+      app.use(json({ limit: '50mb' }));
+      app.use(urlencoded({ extended: true, limit: '50mb' }));
+   }
 
+   private routesMiddleware(app: Application): void {
+      applicationRoutes(app);
+   }
 
-    app.use((req:Request, res:Response, next:NextFunction) => {
-      res.header('Access-Control-Allow-Origin', req.headers.origin);
-      res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-      res.header('Access-Control-Allow-Credentials', 'true');
-      res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-      res.header('Access-Control-Expose-Headers', 'Content-Length, X-JSON');
-      res.header('Access-Control-Allow-Headers', 'Accept, Content-Type, X-Requested-With, Range');
-      res.header('Access-Control-Request-Headers', 'X-Requested-With, accept, content-type');
-      req.headers['x-forwarded-for'] = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-      next();
-    });
+   private globalErrorHandler(app: Application): void {
+      app.all('*', (req: Request, res: Response) => {
+         res.status(HTTP_STATUS.NOT_FOUND).json({ message: `${req.originalUrl} not found` });
+      });
 
-   //  app.use(hpp());
-   //  app.use(helmet());
-  }
+      app.use((error: IErrorResponse, _req: Request, res: Response, next: NextFunction) => {
+         log.error(error);
+         if (error instanceof CustomError) {
+            return res.status(error.statusCode).json(error.serializeErrors());
+         }
+         next();
+      });
+   }
 
-  private standardMiddleware(app: Application): void {
-    app.use(compression());
-    app.use(json({ limit: '50mb' }));
-    app.use(urlencoded({ extended: true, limit: '50mb' }));
-  }
-
-  private routesMiddleware(app: Application): void {
-    applicationRoutes(app);
-  }
-
-  private globalErrorHandler(app: Application): void {
-    app.all('*', (req: Request, res: Response) => {
-      res.status(HTTP_STATUS.NOT_FOUND).json({ message: `${req.originalUrl} not found` });
-    });
-
-    app.use((error: IErrorResponse, _req: Request, res: Response, next: NextFunction) => {
-      log.error(error);
-      if (error instanceof CustomError) {
-        return res.status(error.statusCode).json(error.serializeErrors());
+   private async startServer(app: Application): Promise<void> {
+      try {
+         const httpServer: http.Server = new http.Server(app);
+         const socketIO: Server = await this.createSocketIO(httpServer);
+         this.startHttpServer(httpServer);
+         this.socketIOConnections(socketIO);
+      } catch (error) {
+         log.error(error);
       }
-      next();
-    });
-  }
+   }
 
-  private async startServer(app: Application): Promise<void> {
-    try {
-      const httpServer: http.Server = new http.Server(app);
-      const socketIO: Server = await this.createSocketIO(httpServer);
-      this.startHttpServer(httpServer);
-      this.socketIOConnections(socketIO);
-    } catch (error) {
-      log.error(error);
-    }
-  }
+   private startHttpServer(httpServer: http.Server): void {
+      log.info(`Server has started with process ${process.pid}.`);
+      const PORT = Number(config.PORT) || 5000;
+      httpServer.listen(PORT, () => {
+         console.log(`Server listening on port ${PORT}`);
+         log.info(`Server running at ${PORT}.`);
+      });
+   }
 
-  private startHttpServer(httpServer: http.Server): void {
-    log.info(`Server has started with process ${process.pid}.`);
-    const PORT = Number(config.PORT) || 5000;
-    httpServer.listen(PORT, () => {
-      console.log(`Server listening on port ${PORT}`);
-      log.info(`Server running at ${PORT}.`);
-    });
-  }
+   private async createSocketIO(httpServer: http.Server): Promise<Server> {
+      const io: Server = new Server(httpServer, {
+         cors: {
+            origin: config.CLIENT_URL,
+            methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+         },
+      });
+      const pubClient = createClient({ url: config.REDIS_HOST });
+      const subClient = pubClient.duplicate();
+      await Promise.all([pubClient.connect(), subClient.connect()]);
+      io.adapter(createAdapter(pubClient, subClient));
+      return io;
+   }
 
-  private async createSocketIO(httpServer: http.Server): Promise<Server> {
-    const io: Server = new Server(httpServer, {
-      cors: {
-        origin: config.CLIENT_URL,
-        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS','PATCH']
-      }
-    });
-    const pubClient = createClient({ url: config.REDIS_HOST });
-    const subClient = pubClient.duplicate();
-    await Promise.all([pubClient.connect(), subClient.connect()]);
-    io.adapter(createAdapter(pubClient, subClient));
-    return io;
-  }
-
-  private socketIOConnections(io: Server): void {
-    console.log(io);
-    log.info('SocketIO Connections Ok.');
-  }
+   private socketIOConnections(io: Server): void {
+      console.log(io);
+      log.info('SocketIO Connections Ok.');
+   }
 }

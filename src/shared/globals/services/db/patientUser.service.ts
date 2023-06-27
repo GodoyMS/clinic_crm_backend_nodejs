@@ -28,13 +28,13 @@ class UserService {
       return user;
    }
 
-   public async getUserAuthById(id:string):Promise<IAuthDocument>{
-      const authPatient:IAuthDocument=(await AuthModel.findOne({_id:id}).exec()) as IAuthDocument;
+   public async getUserAuthById(id: string): Promise<IAuthDocument> {
+      const authPatient: IAuthDocument = (await AuthModel.findOne({ _id: id }).exec()) as IAuthDocument;
       return authPatient;
    }
 
-   public async deleteUserAuthById(id:string):Promise<IAuthDocument>{
-      const authPatient:IAuthDocument=(await AuthModel.findByIdAndRemove(id).exec()) as IAuthDocument;
+   public async deleteUserAuthById(id: string): Promise<IAuthDocument> {
+      const authPatient: IAuthDocument = (await AuthModel.findByIdAndRemove(id).exec()) as IAuthDocument;
       return authPatient;
    }
 

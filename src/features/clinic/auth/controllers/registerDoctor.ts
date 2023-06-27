@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
 import { ObjectId } from 'mongodb';
-import { joiValidation } from '@decorators/joi-validation.decorators';
-import { signupSchema } from '@patient/auth/schemes/signup';
 import { authService } from '@services/db/doctorAuth.service';
 import { UserCache } from '@services/redis/doctorUser.cache';
 import { BadRequestError } from '@helpers/errors/badRequestError';
@@ -16,7 +14,7 @@ import HTTP_STATUS from 'http-status-codes';
 import { userService } from '@services/db/clinicUser.service';
 import { SignUpUtility } from './utilities/signup.utility';
 
-import { UploadApiResponse, UploadApiErrorResponse } from 'cloudinary';
+import { UploadApiResponse } from 'cloudinary';
 import { uploads } from '@helpers/cloudinary/cloudinaryUploads';
 import { config } from '@configs/configEnvs';
 
@@ -25,7 +23,7 @@ const userCache: UserCache = new UserCache();
 export class RegisterDoctor extends SignUpUtility {
    //   @joiValidation(signupSchema)
    public async create(req: Request, res: Response): Promise<void> {
-      const { dni, names, job, profileImage,sexo } = req.body;
+      const { dni, names, job, profileImage, sexo } = req.body;
       const checkIfUserExist = await authService.getAuthUserByDni(dni);
       if (checkIfUserExist) {
          throw new BadRequestError('Invalid credentials for this user');
@@ -51,8 +49,6 @@ export class RegisterDoctor extends SignUpUtility {
          password: randomPassword,
       }) as IAuthDocuementDoctor;
 
-
-
       const userDataForCache: IUserDocument = RegisterDoctor.prototype.doctorData(authDataPatient, userObjectId);
 
       if (profileImage && profileImage !== '') {
@@ -61,16 +57,15 @@ export class RegisterDoctor extends SignUpUtility {
             throw new BadRequestError('File upload: Error ocurred. Try again.');
          }
          userDataForCache.profileImage = `${config.CLOUD_DOMAIN}/${config.CLOUD_NAME}/image/upload/v${result.version}/${userObjectId}`;
-      }else{
-         if(sexo === 'Mujer'){
+      } else {
+         if (sexo === 'Mujer') {
             userDataForCache.profileImage = 'https://cdn.midjourney.com/cb90dbf1-ee6b-421a-b580-7597604048eb/0_3.png';
-         }else{
+         } else {
             userDataForCache.profileImage = 'https://cdn.midjourney.com/e39468a9-7df0-4155-87f7-7c9b9d680731/0_2.png';
          }
-
       }
-      userDataForCache.job=job;
-      userDataForCache.sex=sexo;
+      userDataForCache.job = job;
+      userDataForCache.sex = sexo;
 
       await userCache.saveToUserCache(`${userObjectId}`, uId, userDataForCache);
 

@@ -17,10 +17,9 @@ export class DeleteUserDoctor {
       }
       try {
          await deleteFile(existingDoctor.profileImage);
-
       } catch (error) {
-        throw new BadRequestError('Could not delete file from cloudinary');
-        }
+         throw new BadRequestError('Could not delete file from cloudinary');
+      }
 
       const existingAuthDoctor: IAuthDocument | undefined = await userService.deleteUserAuthById(doctorID);
       if (!existingAuthDoctor) {

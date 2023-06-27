@@ -21,12 +21,12 @@ export default (app: Application) => {
       app.use(config.BASE_PATH_CLINIC!, authMiddleware.verifyUser, authRoutesClinic.deleteClinicRoute());
       app.use(config.BASE_PATH_CLINIC!, authMiddleware.verifyUser, currentUserRoutesClinic.currentUserRoute());
 
-            //actions
-            app.use(config.BASE_PATH_CLINIC!, authMiddleware.verifyUser, clinicAuthActionsRoutes.getUpdateAuth());
-            app.use(config.BASE_PATH_CLINIC!, authMiddleware.verifyUser, clinicAuthActionsRoutes.patientActions());
-            app.use(config.BASE_PATH_CLINIC!, authMiddleware.verifyUser, clinicAuthActionsRoutes.doctorActions());
-            app.use(config.BASE_PATH_CLINIC!, authMiddleware.verifyUser, clinicAuthActionsRoutes.appointmentActions());
-            app.use(config.BASE_PATH_CLINIC!, authMiddleware.verifyUser, clinicUserActionsRoutes.updateClinicInfoRoute());
+      //actions
+      app.use(config.BASE_PATH_CLINIC!, authMiddleware.verifyUser, clinicAuthActionsRoutes.getUpdateAuth());
+      app.use(config.BASE_PATH_CLINIC!, authMiddleware.verifyUser, clinicAuthActionsRoutes.patientActions());
+      app.use(config.BASE_PATH_CLINIC!, authMiddleware.verifyUser, clinicAuthActionsRoutes.doctorActions());
+      app.use(config.BASE_PATH_CLINIC!, authMiddleware.verifyUser, clinicAuthActionsRoutes.appointmentActions());
+      app.use(config.BASE_PATH_CLINIC!, authMiddleware.verifyUser, clinicUserActionsRoutes.updateClinicInfoRoute());
 
       //PATIENT ROUTES
       app.use(config.BASE_PATH_PATIENT!, authPatientRoutes.routes());

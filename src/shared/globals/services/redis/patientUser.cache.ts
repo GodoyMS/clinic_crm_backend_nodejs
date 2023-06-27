@@ -48,27 +48,22 @@ export class UserCache extends BaseCache {
          throw new ServerError('Server Redis error. Try again.');
       }
    }
-   public async deleteAUserCache(key:string):Promise<void>{
-
+   public async deleteAUserCache(key: string): Promise<void> {
       try {
          if (!this.client.isOpen) {
-            await this.client.connect();         }
+            await this.client.connect();
+         }
 
-        await this.client.DEL(`usersPatient:${key}`);
-
+         await this.client.DEL(`usersPatient:${key}`);
       } catch (error) {
          log.error(error);
          throw new ServerError('Server Redis error. Try again.');
       }
-
-
-
    }
 
-   public async updateInfoAndSaveToUserCache (key:string,exisitingUser:IUserDocument):Promise<void>{
-
+   public async updateInfoAndSaveToUserCache(key: string, exisitingUser: IUserDocument): Promise<void> {
       const { _id, uId, dni, clinicId, email, phone, names, age, city, sex, clinicHistory, odontogram, consent } =
-      exisitingUser;
+         exisitingUser;
 
       const dataToSave = {
          _id: `${_id}`,
@@ -88,8 +83,8 @@ export class UserCache extends BaseCache {
 
       try {
          if (!this.client.isOpen) {
-            await this.client.connect();         }
-
+            await this.client.connect();
+         }
 
          for (const [itemKey, itemValue] of Object.entries(dataToSave)) {
             await this.client.HSET(`usersPatient:${key}`, `${itemKey}`, `${itemValue}`);
@@ -98,8 +93,7 @@ export class UserCache extends BaseCache {
          log.error(error);
          throw new ServerError('Server Redis error. Try again.');
       }
-
-   };
+   }
 
    public async getUserFromCache(userId: string): Promise<IUserDocument | null> {
       try {

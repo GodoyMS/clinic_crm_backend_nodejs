@@ -3,7 +3,7 @@ import { SignUp } from '@clinic/auth/controllers/signup';
 import { SignIn } from '@clinic/auth/controllers/signin';
 import { SignOut } from '@clinic/auth/controllers/signout';
 import { DeleteUserClinic } from '../controllers/deleteClinic';
-import { AuthMiddleware, authMiddleware } from '@helpers/middlewares/auth-middleware';
+import {  authMiddleware } from '@helpers/middlewares/auth-middleware';
 
 class AuthRoutes {
    private router: Router;
@@ -30,7 +30,6 @@ class AuthRoutes {
 
       return this.router;
    }
-
 }
 
 export const authRoutesClinic: AuthRoutes = new AuthRoutes();

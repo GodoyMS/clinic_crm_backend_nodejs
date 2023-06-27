@@ -10,8 +10,6 @@ import { ObjectId } from 'mongodb';
 import fs from 'fs';
 import { deleteFile } from '@helpers/cloudinary/deleteCloudinaryFileByURL';
 
-
-
 const userCache: UserCache = new UserCache();
 
 export class UpdateClinicHistory {
@@ -65,18 +63,13 @@ export class UpdateClinicHistory {
 
    public async delete(req: Request, res: Response): Promise<void> {
       const patientID = req.params.id;
-      const {historyUrl}=req.body;
-
+      const { historyUrl } = req.body;
 
       try {
-          await deleteFile(historyUrl);
-       } catch (error) {
+         await deleteFile(historyUrl);
+      } catch (error) {
          throw new BadRequestError('Could not delete file from cloudinary');
-         }
-
-
-
-
+      }
 
       const existingPatient: IUserDocumentPatient | undefined = await userServicePatient.deleteClinicHistoryPatientById(
          patientID,

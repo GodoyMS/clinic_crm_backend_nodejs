@@ -1,4 +1,4 @@
 export interface Iimage {
-  version: string;
-  public_id: string;
+   version: string;
+   public_id: string;
 }
