@@ -29,10 +29,8 @@ export class UpdateAuth {
       await userCache.updateAFieldUserInCache(`${userId}`, 'username', `${username}`);
 
       const cachedUser: IUserDocument = (await userCache.getUserFromCache(userId)) as IUserDocument;
-      const existingUserFromCache: IUserDocument = cachedUser
-         ? cachedUser
-         : await userService.getUserById(userId);
-      
+      const existingUserFromCache: IUserDocument = cachedUser ? cachedUser : await userService.getUserById(userId);
+
       res.status(HTTP_STATUS.OK).json({ message: 'Clinic auth data succesfully updated', user: existingUserFromCache });
    }
 

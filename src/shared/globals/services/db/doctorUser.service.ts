@@ -28,19 +28,22 @@ class UserService {
       return user;
    }
 
-   public async updateProfileImageById(id: string,url:string): Promise<IUserDocument> {
-      const user: IUserDocument = (await UserModel.findByIdAndUpdate(id,{profileImage:url},{new:true}).exec()) as IUserDocument;
+   public async updateProfileImageById(id: string, url: string): Promise<IUserDocument> {
+      const user: IUserDocument = (await UserModel.findByIdAndUpdate(
+         id,
+         { profileImage: url },
+         { new: true },
+      ).exec()) as IUserDocument;
       return user;
    }
 
-
-   public async getUserAuthById(id:string):Promise<IAuthDocument>{
-      const authPatient:IAuthDocument=(await AuthModel.findOne({_id:id}).exec()) as IAuthDocument;
+   public async getUserAuthById(id: string): Promise<IAuthDocument> {
+      const authPatient: IAuthDocument = (await AuthModel.findOne({ _id: id }).exec()) as IAuthDocument;
       return authPatient;
    }
 
-   public async deleteUserAuthById(id:string):Promise<IAuthDocument>{
-      const authPatient:IAuthDocument=(await AuthModel.findByIdAndRemove(id).exec()) as IAuthDocument;
+   public async deleteUserAuthById(id: string): Promise<IAuthDocument> {
+      const authPatient: IAuthDocument = (await AuthModel.findByIdAndRemove(id).exec()) as IAuthDocument;
       return authPatient;
    }
 
@@ -52,16 +55,6 @@ class UserService {
       return user;
    }
 
-
-
-
-
-
-
-
-
-
-
    private aggregateProject() {
       return {
          _id: 1,
@@ -72,7 +65,6 @@ class UserService {
          names: 1,
          age: 1,
          sex: 1,
-
       };
    }
 }

@@ -7,7 +7,6 @@ import { appointmentService } from '@services/db/appointment.service';
 import { IAppointmentDocument } from '@root/features/appointment/interfaces/appointmentDocument.interface';
 import { AuthPayload } from '../interfaces/authPayload.interface';
 
-
 export class GetClinicAppointmentById {
    public async read(req: Request, res: Response): Promise<void> {
       const appointmentID = req.params.id;
@@ -19,14 +18,13 @@ export class GetClinicAppointmentById {
          throw new BadRequestError('Invalid credentials');
       }
 
-      const existingAppointment:IAppointmentDocument  | undefined = await appointmentService.getAppointmentById(appointmentID);
+      const existingAppointment: IAppointmentDocument | undefined = await appointmentService.getAppointmentById(
+         appointmentID,
+      );
       if (!existingAppointment) {
          throw new BadRequestError('Invalid appointment');
-
       }
 
-
-
-      res.status(HTTP_STATUS.OK).json({ appointment:existingAppointment  });
+      res.status(HTTP_STATUS.OK).json({ appointment: existingAppointment });
    }
 }

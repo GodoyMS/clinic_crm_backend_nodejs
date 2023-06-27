@@ -23,21 +23,17 @@ export class UserCache extends BaseCache {
       }
    }
 
-   public async deleteAUserCache(key:string):Promise<void>{
-
+   public async deleteAUserCache(key: string): Promise<void> {
       try {
          if (!this.client.isOpen) {
-            await this.client.connect();         }
+            await this.client.connect();
+         }
 
-        await this.client.DEL(`usersClinic:${key}`);
-
+         await this.client.DEL(`usersClinic:${key}`);
       } catch (error) {
          log.error(error);
          throw new ServerError('Server Redis error. Try again.');
       }
-
-
-
    }
 
    public async updateAllFieldsInCache(key: string, userUId: string, updatedUser: IUserDocument): Promise<void> {
@@ -90,7 +86,7 @@ export class UserCache extends BaseCache {
          await this.client.ZADD('userClinic', { score: parseInt(userUId, 10), value: `${key}` });
 
          for (const [itemKey, itemValue] of Object.entries(dataToSave)) {
-            await this.client.HSET(`usersClinic:${key}`,`${itemKey}`, `${itemValue}`);
+            await this.client.HSET(`usersClinic:${key}`, `${itemKey}`, `${itemValue}`);
          }
       } catch (error) {
          log.error(error);
