@@ -35,6 +35,14 @@ export class ClinicsServer {
 
   private securityMiddleware(app: Application): void {
     // Design pattern Synchronizer Token Pattern: https://medium.com/@kaviru.mihisara/synchronizer-token-pattern-e6b23f53518e
+
+    app.use((req:Request, res:Response, next:NextFunction) => {
+      res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Content-Encoding, x-apollo-tracing');
+
+      res.header('Access-Control-Expose-Headers', 'Content-Length, X-JSON');
+      res.header('Access-Control-Allow-Headers', 'Accept, Content-Type, X-Requested-With, Range');
+      next();
+    });
     app.use(
       cookieSession({
         name: 'session',
@@ -59,15 +67,7 @@ export class ClinicsServer {
     );
 
 
-    app.use((req:Request, res:Response, next:NextFunction) => {
-      res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Content-Encoding, x-apollo-tracing');
 
-      res.header('Access-Control-Expose-Headers', 'Content-Length, X-JSON');
-      res.header('Access-Control-Allow-Headers', 'Accept, Content-Type, X-Requested-With, Range');
-      res.header('Access-Control-Request-Headers', 'X-Requested-With, accept, content-type');
-      req.headers['x-forwarded-for'] = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-      next();
-    });
 
      app.use(hpp());
      app.use(helmet());
