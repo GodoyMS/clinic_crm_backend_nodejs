@@ -1,8 +1,12 @@
+
 declare global {
    namespace Express {
       interface Request {
          currentUser?: AuthPayload;
+         jwt?:string
       }
+
+
    }
 }
 
@@ -13,6 +17,6 @@ export interface AuthPayload {
    uId: string;
    email: string;
    username: string;
-
    iat?: number;
 }
+

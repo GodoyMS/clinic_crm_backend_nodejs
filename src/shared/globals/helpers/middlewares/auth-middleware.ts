@@ -1,12 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
-import JWT from 'jsonwebtoken';
+import JWT, { JwtPayload } from 'jsonwebtoken';
 import { config } from '@configs/configEnvs';
 import { NotAuthorizedError } from '@helpers/errors/notAuthorizedError';
 import { AuthPayload } from '@clinic/auth/interfaces/authPayload.interface';
 
+
+
+// Custom interface extending SessionData
+
 export class AuthMiddleware {
    public verifyUser(req: Request, _res: Response, next: NextFunction): void {
-      if (!req.session?.jwt) {
+      if (!req.session?.jwt ) {
          throw new NotAuthorizedError('Token is not available. Please login again.');
       }
 

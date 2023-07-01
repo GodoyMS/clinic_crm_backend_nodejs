@@ -5,7 +5,6 @@ import helmet from 'helmet';
 import hpp from 'hpp';
 import compression from 'compression';
 import cookieSession from 'cookie-session';
-import session from 'express-session';
 import Logger from 'bunyan';
 import 'express-async-errors';
 import HTTP_STATUS from 'http-status-codes';
@@ -48,25 +47,24 @@ export class ClinicsServer {
          next();
       });
       app.use(
-         session({
-            secret: config.SECRET_KEY_ONE!,
-            name:'session',
-            resave: true,
-            saveUninitialized: true,
-            cookie: {
-               secure: config.NODE_ENV !== 'development',
-               maxAge: 24 * 7 * 3600000,
-            },
-         }),
-         // cookieSession({
-         //   name: 'session',
+         // session({
+         //    secret: config.SECRET_KEY_ONE!,
+         //    resave: true,
+         //    saveUninitialized: true,
+         //    cookie: {
+         //       secure: config.NODE_ENV !== 'development',
+         //       maxAge: 24 * 7 * 3600000,
+         //    },
+         // }),
+          cookieSession({
+            name: 'session',
 
-         //   keys: [config.SECRET_KEY_ONE!, config.SECRET_KEY_TWO!],
-         //   maxAge: 24 * 7 * 3600000,
-         //   secure: config.NODE_ENV !== 'development',
-         //   sameSite:'none'
+            keys: [config.SECRET_KEY_ONE!, config.SECRET_KEY_TWO!],
+            maxAge: 24 * 7 * 3600000,
+            secure: config.NODE_ENV !== 'development',
+            sameSite:'none'
 
-         // })
+          })
       );
       app.use(
          cors({
